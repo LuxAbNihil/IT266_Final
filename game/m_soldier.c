@@ -1144,7 +1144,10 @@ mmove_t soldier_move_death6 = {FRAME_death601, FRAME_death610, soldier_frames_de
 void soldier_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
 	int		n;
-
+	//Daniel DeMartino Start
+	int experience = 10;
+	gclient_t *player;
+	//Daniel DeMartino End
 // check for gib
 	if (self->health <= self->gib_health)
 	{
@@ -1190,6 +1193,16 @@ void soldier_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 		self->monsterinfo.currentmove = &soldier_move_death5;
 	else
 		self->monsterinfo.currentmove = &soldier_move_death6;
+
+
+	//Daniel DeMartino Start
+
+	if (inflictor != NULL){
+		gi.dprintf("In if statement.");
+		void giveExp(int experience, gclient_t *player);
+		gi.dprintf("In inflictor if statement");
+	}
+	//Daniel DeMartino End
 }
 
 

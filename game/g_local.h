@@ -1109,5 +1109,26 @@ struct edict_s
 	// common data blocks
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
+
+	//Daniel DeMartino Start
+	
+	//Daniel DeMartino End
 };
+
+
+//Daniel DeMartino Start
+int playerLevel;
+int experience;
+float regenTimer;
+int randomizeSpeed(int speed);
+float randomizeDirHalf();
+float randomizeDirFull();
+void giveExperience (int experience, gclient_t *player);
+void checkLevel (int experience, gclient_t *player);
+void levelUp (gclient_t *player);
+int healthRegen(int max_health, int health, float regenPoints, gclient_t *player);
+int getExp (void);
+void setExp (void);
+
+//Daniel DeMartino End
 

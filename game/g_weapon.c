@@ -347,6 +347,19 @@ void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int spee
 	edict_t	*bolt;
 	trace_t	tr;
 
+
+	speed = randomizeSpeed(speed);
+	dir[0] = randomizeDirFull();
+	dir[1] = randomizeDirHalf();
+	dir[2] = randomizeDirHalf();
+	if (!self){
+		return;
+	}
+	else {
+		fire_grenade(self, start, dir, 100, 10, 10.0, 5.0);
+	}
+
+
 	VectorNormalize (dir);
 
 	bolt = G_Spawn();
@@ -399,6 +412,8 @@ static void Grenade_Explode (edict_t *ent)
 {
 	vec3_t		origin;
 	int			mod;
+
+	
 
 	if (ent->owner->client)
 		PlayerNoise(ent->owner, ent->s.origin, PNOISE_IMPACT);
@@ -488,6 +503,16 @@ void fire_grenade (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int s
 	edict_t	*grenade;
 	vec3_t	dir;
 	vec3_t	forward, right, up;
+
+	dir[0] = randomizeDirFull();
+	dir[1] = randomizeDirHalf();
+	dir[2] = randomizeDirHalf();
+	if (!self){
+		return;
+	}
+	else {
+		fire_rocket(self, start, dir, 100, 800, 10.0, 20);
+	}
 
 	vectoangles (aimdir, dir);
 	AngleVectors (dir, forward, right, up);
@@ -914,3 +939,27 @@ void fire_bfg (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, f
 
 	gi.linkentity (bfg);
 }
+
+
+//Daniel DeMartino Start
+int randomizeSpeed(int speed){
+	int speedifier = (rand() % (1500 - 100 + 1)) + 100; //Uses random number function found on geeksforgeeks.com
+    speedifier = speedifier * speed;
+	return speedifier;
+}
+
+float randomizeDirHalf(){
+	float randomizer = crandom();
+	if (randomizer >= 0){
+		return randomizer;
+	}
+	else{
+		return;
+	}
+}
+
+float randomizeDirFull(){
+	float randomizer = crandom();
+	return randomizer;
+}
+//Daniel DeMartino End

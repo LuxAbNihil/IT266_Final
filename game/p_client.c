@@ -24,6 +24,11 @@ void ClientUserinfoChanged (edict_t *ent, char *userinfo);
 
 void SP_misc_teleporter_dest (edict_t *ent);
 
+//Daniel DeMartino Start
+int experience;
+int playerLevel;
+float regenPoints = (1 / 60);
+//Daniel DeMartino End
 //
 // Gross, ugly, disgustuing hack section
 //
@@ -1741,7 +1746,35 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		if (other->inuse && other->client->chase_target == ent)
 			UpdateChaseCam(other);
 	}
-}
+
+	//Daniel DeMartino Start
+	//dprintf("In Think function");
+	
+	if (ent->health < ent->max_health)
+	{
+		if (regenTimer > 1.0)
+		{
+			gi.dprintf("$%i This is my health", ent->health);
+			ent->health = ent->health + 1;
+			regenTimer = 0.0;
+		}
+		else {
+			regenTimer += 0.005;
+		}
+	}
+	
+
+	//float healthRegenPoints = healthRegen(client->pers.max_health, client->pers.health, regenPoints, client);
+	//if (healthRegenPoints >= 1.0){
+		//gi.dprintf("Health should be regening");
+		//client->pers.health = client->pers.health + (int)healthRegenPoints;
+		//char healthtobeadded[32];
+		//regenPoints = (1 / 60)
+	//gi.dprintf("In client think function");
+	
+
+	//Daniel DeMartino End
+	}
 
 
 /*
@@ -1802,4 +1835,62 @@ void ClientBeginServerFrame (edict_t *ent)
 			PlayerTrail_Add (ent->s.old_origin);
 
 	client->latched_buttons = 0;
+
+
 }
+
+
+//Daniel DeMartino Start
+//float healthRegen(){
+	//return 1;
+	
+	//if (health >= max_health){
+	//	return 0.0;
+	//}else{
+	//	regenPoints = regenPoints + (1 / 60);
+		//gi.dprintf("In regenPoint adding code block");
+	//	return regenPoints;
+	//}
+//}
+
+void giveExp(int experiene, gclient_t *player){
+	int oldExp = getExp();
+	int exp = oldExp + experience;
+	checkLevel(exp, player);
+	setExp(exp);
+}
+
+void checkLevel(int experience, gclient_t *player){
+	if (exp >= 10 && playerLevel <= 14){
+		levelUp(player);
+	}
+	else{
+		return;
+	}
+}
+
+void levelUp(gclient_t *player){
+	gi.centerprintf(player, "Congrats! You leveled up!");
+	player->pers.max_health = player->pers.max_health * 1.1;
+	experience = 0;
+}
+
+int getExp(void){
+	return experience;
+}
+
+void setExp(int exp){
+	experience = exp;
+}
+
+/*	if (regenPoints >= 1){
+		if (health >= maxHealth){
+			return 0;
+		}
+		else{
+			return (int)regenPoints;
+		}
+	} else{ 
+		regenPoints = regenPoints + (1 / 60);
+	}*/
+//Daniel DeMartino End

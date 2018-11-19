@@ -423,6 +423,12 @@ void infantry_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dam
 		self->monsterinfo.currentmove = &infantry_move_death3;
 		gi.sound (self, CHAN_VOICE, sound_die2, 1, ATTN_NORM, 0);
 	}
+
+	if (inflictor != NULL){
+		gi.dprintf("In if statement.");
+		void giveExp(int experience, gclient_t *player);
+		gi.dprintf("In inflictor if statement");
+	}
 }
 
 

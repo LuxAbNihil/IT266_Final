@@ -41,10 +41,10 @@ AI_SetSightClient
 Called once each frame to set level.sight_client to the
 player to be checked for in findtarget.
 
-If all clients are either dead or in notarget, sight_client
 will be null.
 
 In coop games, sight_client will cycle between the clients.
+If all clients are either dead or in notarget, sight_client
 =================
 */
 void AI_SetSightClient (void)
