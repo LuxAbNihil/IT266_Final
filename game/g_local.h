@@ -1111,24 +1111,27 @@ struct edict_s
 	monsterinfo_t	monsterinfo;
 
 	//Daniel DeMartino Start
-	
+
+	int experience;
+	int playerLevel;
 	//Daniel DeMartino End
 };
 
 
 //Daniel DeMartino Start
-int playerLevel;
-int experience;
+
 float regenTimer;
 int randomizeSpeed(int speed);
 float randomizeDirHalf();
 float randomizeDirFull();
-void giveExperience (int experience, gclient_t *player);
-void checkLevel (int experience, gclient_t *player);
-void levelUp (gclient_t *player);
-int healthRegen(int max_health, int health, float regenPoints, gclient_t *player);
-int getExp (void);
-void setExp (void);
+void giveExperience (int experience, edict_t *player);
+void checkLevel (edict_t *player);
+void levelUp (edict_t *player);
+int getExp (edict_t *player);
+void setExp (int experience, edict_t *player);
+int getPlayerLevel(edict_t *player);
+void setPlayerLevel(int plevel, edict_t *player);
+qboolean Assault_Class(edict_t *ent, edict_t *other);
 
 //Daniel DeMartino End
 

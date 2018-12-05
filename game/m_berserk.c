@@ -405,6 +405,10 @@ void berserk_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 		self->monsterinfo.currentmove = &berserk_move_death1;
 	else
 		self->monsterinfo.currentmove = &berserk_move_death2;
+
+	gi.dprintf("In if statement.");
+	void giveExp(int experience, gclient_t *player);
+	gi.dprintf("In inflictor if statement");
 }
 
 

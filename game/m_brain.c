@@ -614,6 +614,10 @@ void brain_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage
 		self->monsterinfo.currentmove = &brain_move_death1;
 	else
 		self->monsterinfo.currentmove = &brain_move_death2;
+
+	gi.dprintf("In if statement.");
+	void giveExp(int experience, gclient_t *player);
+	gi.dprintf("In inflictor if statement");
 }
 
 /*QUAKED monster_brain (1 .5 0) (-16 -16 -24) (16 16 32) Ambush Trigger_Spawn Sight

@@ -354,6 +354,10 @@ void flipper_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 	self->deadflag = DEAD_DEAD;
 	self->takedamage = DAMAGE_YES;
 	self->monsterinfo.currentmove = &flipper_move_death;
+
+	gi.dprintf("In if statement.");
+	void giveExp(int experience, gclient_t *player);
+	gi.dprintf("In inflictor if statement");
 }
 
 /*QUAKED monster_flipper (1 .5 0) (-16 -16 -24) (16 16 32) Ambush Trigger_Spawn Sight

@@ -604,6 +604,9 @@ void floater_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 {
 	gi.sound (self, CHAN_VOICE, sound_death1, 1, ATTN_NORM, 0);
 	BecomeExplosion1(self);
+	gi.dprintf("In if statement.");
+	void giveExp(int experience, gclient_t *player);
+	gi.dprintf("In inflictor if statement");
 }
 
 /*QUAKED monster_floater (1 .5 0) (-16 -16 -24) (16 16 32) Ambush Trigger_Spawn Sight

@@ -853,8 +853,13 @@ void Weapon_Blaster_Fire (edict_t *ent)
 	else
 		damage = 10;
 	Blaster_Fire (ent, vec3_origin, damage, false, EF_BLASTER);
-	Blaster_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
-	Blaster_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
+	if (ent->client && ent->playerLevel > 2){
+		Blaster_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
+	}
+	if (ent->client && ent->playerLevel > 3){
+		Blaster_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
+	}
+	
 	ent->client->ps.gunframe++;
 }
 

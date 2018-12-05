@@ -1754,7 +1754,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 	{
 		if (regenTimer > 1.0)
 		{
-			gi.dprintf("$%i This is my health", ent->health);
+			//gi.dprintf("$%i This is my health", ent->health);
 			ent->health = ent->health + 1;
 			regenTimer = 0.0;
 		}
@@ -1762,16 +1762,8 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 			regenTimer += 0.005;
 		}
 	}
-	
+	checkLevel(ent);
 
-	//float healthRegenPoints = healthRegen(client->pers.max_health, client->pers.health, regenPoints, client);
-	//if (healthRegenPoints >= 1.0){
-		//gi.dprintf("Health should be regening");
-		//client->pers.health = client->pers.health + (int)healthRegenPoints;
-		//char healthtobeadded[32];
-		//regenPoints = (1 / 60)
-	//gi.dprintf("In client think function");
-	
 
 	//Daniel DeMartino End
 	}
@@ -1841,56 +1833,52 @@ void ClientBeginServerFrame (edict_t *ent)
 
 
 //Daniel DeMartino Start
-//float healthRegen(){
-	//return 1;
-	
-	//if (health >= max_health){
-	//	return 0.0;
-	//}else{
-	//	regenPoints = regenPoints + (1 / 60);
-		//gi.dprintf("In regenPoint adding code block");
-	//	return regenPoints;
-	//}
+
+//void giveExp(int experience, edict_t *attacker){
+	//gi.dprintf("\n\nIn give Exp function");
+	//int oldExp = getExp(attacker);
+	//int exp = oldExp + experience;
+	//checkLevel(exp, attacker);
 //}
 
-void giveExp(int experiene, gclient_t *player){
-	int oldExp = getExp();
-	int exp = oldExp + experience;
-	checkLevel(exp, player);
-	setExp(exp);
-}
-
-void checkLevel(int experience, gclient_t *player){
-	if (exp >= 10 && playerLevel <= 14){
-		levelUp(player);
+void checkLevel(edict_t *attacker){
+	gi.dprintf("In check level function");
+	if (attacker->client && attacker->experience >= 10 && attacker->playerLevel <= 15)
+	{
+		levelUp(attacker);
 	}
-	else{
-		return;
+	else if (attacker->playerLevel < 14)
+	{
+		setExp(experience, attacker);
+	}
+	else {
+		setExp(0, attacker);
 	}
 }
 
-void levelUp(gclient_t *player){
-	gi.centerprintf(player, "Congrats! You leveled up!");
-	player->pers.max_health = player->pers.max_health * 1.1;
-	experience = 0;
+void levelUp(edict_t *attacker){
+	gi.centerprintf(attacker, "Congrats! You leveled up!");
+	int plevel = getPlayerLevel(attacker);
+	plevel++;
+	setPlayerLevel(plevel, attacker);
+	attacker->max_health = attacker->max_health * 1.1;
+	setExp(0, attacker);
 }
 
-int getExp(void){
-	return experience;
+int getExp(edict_t *player){
+	return player->experience;
 }
 
-void setExp(int exp){
-	experience = exp;
+void setExp(int exp, edict_t *attacker){
+	attacker->experience = exp;
 }
 
-/*	if (regenPoints >= 1){
-		if (health >= maxHealth){
-			return 0;
-		}
-		else{
-			return (int)regenPoints;
-		}
-	} else{ 
-		regenPoints = regenPoints + (1 / 60);
-	}*/
+int getPlayerLevel(edict_t *attacker){
+	return attacker->playerLevel;
+}
+
+void setPlayerLevel(int plevel, edict_t *player){
+	player->playerLevel = plevel;
+}
+
 //Daniel DeMartino End

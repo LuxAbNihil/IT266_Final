@@ -1146,8 +1146,13 @@ void soldier_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 	int		n;
 	//Daniel DeMartino Start
 	int experience = 10;
-	gclient_t *player;
+
+	if (attacker != NULL){
+		attacker->experience += experience;
+		gi.dprintf("Experience is $%i", attacker->experience);
+	}
 	//Daniel DeMartino End
+
 // check for gib
 	if (self->health <= self->gib_health)
 	{
@@ -1197,9 +1202,9 @@ void soldier_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int dama
 
 	//Daniel DeMartino Start
 
-	if (inflictor != NULL){
+	if (attacker != NULL){
 		gi.dprintf("In if statement.");
-		void giveExp(int experience, gclient_t *player);
+		void giveExp(int experience, edict_t *attacker);
 		gi.dprintf("In inflictor if statement");
 	}
 	//Daniel DeMartino End

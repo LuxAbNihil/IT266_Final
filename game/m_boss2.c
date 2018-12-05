@@ -511,6 +511,10 @@ void boss2_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage
 	self->takedamage = DAMAGE_NO;
 	self->count = 0;
 	self->monsterinfo.currentmove = &boss2_move_death;
+	gi.dprintf("In if statement.");
+	void giveExp(int experience, gclient_t *player);
+	gi.dprintf("In inflictor if statement");
+
 #if 0
 	int		n;
 

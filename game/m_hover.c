@@ -566,6 +566,9 @@ void hover_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage
 	self->deadflag = DEAD_DEAD;
 	self->takedamage = DAMAGE_YES;
 	self->monsterinfo.currentmove = &hover_move_death1;
+
+	gi.dprintf("In if statement.");
+	void giveExp(int experience, edict_t *attacker);
 }
 
 /*QUAKED monster_hover (1 .5 0) (-16 -16 -24) (16 16 32) Ambush Trigger_Spawn Sight

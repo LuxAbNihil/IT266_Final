@@ -331,6 +331,10 @@ void gladiator_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int da
 	self->takedamage = DAMAGE_YES;
 
 	self->monsterinfo.currentmove = &gladiator_move_death;
+
+	gi.dprintf("In if statement.");
+	void giveExp(int experience, gclient_t *player);
+	gi.dprintf("In inflictor if statement");
 }
 
 
